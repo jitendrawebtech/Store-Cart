@@ -43,8 +43,8 @@ export const fetchProductsData = createAsyncThunk("products/productData", async 
 
   const [productRes, categoriesRes] = await Promise.all(
     [
-      await fetch("https://fakestoreapi.com/products"),
-      await fetch("https://fakestoreapi.com/products/categories")
+      fetch("https://fakestoreapi.com/products"),
+      fetch("https://fakestoreapi.com/products/categories")
     ]
   );
 

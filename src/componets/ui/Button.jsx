@@ -20,7 +20,7 @@ const Button = ({
 
 
   return (
-    <Link to={to} className={`${baseStyle} ${varients[varient]}`}> {children} </Link>
+    <Link to={to} className={`${baseStyle} ${varients[varient]} ${className}`}> {children} </Link>
   )
 }
 

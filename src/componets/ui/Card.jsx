@@ -1,0 +1,47 @@
+import { FaRegStar, FaStar } from "react-icons/fa";
+import Button from "./Button";
+import { Link } from "react-router-dom";
+
+const Card = ({ product, textToCart, textToBuy }) => {
+  const { image, price, title, rating, id } = product;
+  return (
+    <div className="rounded-sm shadow-gray-300 shadow-xl overflow-hidden">
+      <Link to={`/product/${id}`} className="bg-gray-200 py-4 px-2 h-60 block">
+        <img className="mx-auto w-full h-full" src={image} alt={title} />
+      </Link>
+      <div className="bg-white p-4 flex flex-col gap-y-1">
+
+        <Link to={`/product/${id}`} className="text-gray-600">{title?.slice(0, 20) + "..."}</Link>
+        <div className="flex items-center gap-x-2">
+          <div className="inline-flex text-green-600">
+            {
+              Array.from({ length: Math.round(rating?.rate) }, (a, i) => (
+                <FaStar key={i} />
+              ))
+            }
+            {
+              Array.from({ length: 5 - Math.round(rating?.rate) }, (a, i) => (
+                <FaRegStar key={i} />
+              ))
+            }
+          </div>
+          <p className="text-gray-500 text-sm">({rating?.rate})</p>
+        </div>
+        <p className="flex gap-x-2 font-bold text-lg">
+          <span className="text-green-600">${price}</span>
+          <span className="text-gray-400 line-through">${Math.round((price * 1.6) * 100) / 100}</span>
+        </p>
+        <div className="flex flex-col gap-y-2 text-center">
+          <Button className="flex justify-center" varient="btnBlackBg" >
+            {textToCart}
+          </Button>
+          <Button className="flex justify-center" varient="btnWhiteBg">
+            {textToBuy}
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Card
