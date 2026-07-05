@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
-const FilterBtn = ({ forFilterVal = [], defaultText }) => {
+const FilterBtn = ({ forFilterVal = [], defaultText, onChange }) => {
+
   const [selectedVal, setSelectedVal] = useState("all");
 
   const normalizedOptions = forFilterVal.map((item) => {
@@ -15,14 +17,19 @@ const FilterBtn = ({ forFilterVal = [], defaultText }) => {
     return { value: "", label: "" };
   });
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSelectedVal(value);
+    onChange?.(value);
+  };
 
   return (
     <select
       className="border p-2 text-xs rounded-md capitalize"
       value={selectedVal}
-      onChange={(e) => setSelectedVal(e.target.value)}
+      onChange={handleChange}
     >
-      <option value="all">{defaultText}</option>
+      <option value="">{defaultText}</option>
       {normalizedOptions.map((option, i) => (
         <option key={i} value={option.value}>
           {option.label}

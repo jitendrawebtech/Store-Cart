@@ -1,10 +1,10 @@
-import React from 'react'
 import logo from '../../assets/images/logo.png';
 import Nav from '../ui/Nav';
 import Search from '../ui/Search';
 import { Link, NavLink } from 'react-router-dom';
 import Cart from '../ui/Cart';
 import LoginUser from '../ui/LoginUser';
+import { mainLinks } from '../../constants/navigationData';
 
 
 const Header = () => {
@@ -15,7 +15,8 @@ const Header = () => {
           <Link className="logo">
             <img src={logo} alt="Logo" />
           </Link>
-          <Nav ulClass="hidden lg:flex gap-x-5" linkClass="text-gray-600 hover:text-cyan-600" />
+          <Nav links={mainLinks} ulClass="hidden lg:flex gap-x-5" linkClass="text-gray-600 hover:text-cyan-600" />
+
           <Search />
           <div className="flex items-center gap-x-5">
             <Cart />

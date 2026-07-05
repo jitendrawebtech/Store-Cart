@@ -1,21 +1,22 @@
 import { NavLink } from 'react-router-dom';
 
-const Nav = ({ navClass, ulClass, linkClass }) => {
+const Nav = ({ links, ulClass, linkClass }) => {
   return (
     <nav>
       <ul className={ulClass}>
-        <li>
-          <NavLink className={({ isActive }) => ` transition-all duration-300 ${isActive ? 'text-cyan-600' : linkClass}`} to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink className={({ isActive }) => ` transition-all duration-300 ${isActive ? 'text-cyan-600' : linkClass}`} to="/products">Products</NavLink>
-        </li>
-        <li>
-          <NavLink className={({ isActive }) => ` transition-all duration-300 ${isActive ? 'text-cyan-600' : linkClass}`} to="/categories">Categories</NavLink>
-        </li >
-        <li>
-          <NavLink className={({ isActive }) => ` transition-all duration-300 ${isActive ? 'text-cyan-600' : linkClass}`} to="/contact">Contact</NavLink>
-        </li >
+
+        {
+          links?.map((item, i) => (
+            <li key={i}>
+              <NavLink
+                end={item.link === "/"}
+                className={({ isActive }) => ` transition-all duration-300 ${isActive ? 'text-cyan-600 active' : linkClass}`}
+                to={item.link}>{item.text}
+              </NavLink>
+            </li>
+          ))
+        }
+
       </ul >
     </nav >
   )
