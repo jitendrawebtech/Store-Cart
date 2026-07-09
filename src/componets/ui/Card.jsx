@@ -13,8 +13,8 @@ const Card = ({ product, textToCart, textToBuy }) => {
 
         <Link to={`/product/${id}`} className="text-gray-600 text-sm font-semibold">{title?.slice(0, 20) + "..."}</Link>
         <p className="flex gap-x-2 font-bold text-lg">
-          <span className="text-green-600">${price}</span>
-          <span className="text-gray-400 line-through">${Math.round((price * 1.6) * 100) / 100}</span>
+          <span className="text-green-600">${price.toFixed(0)}</span>
+          <span className="text-gray-400 line-through">${(price * 1.6).toFixed(0)}</span>
         </p>
         <div className="flex items-center gap-x-2">
           <div className="inline-flex text-green-600">

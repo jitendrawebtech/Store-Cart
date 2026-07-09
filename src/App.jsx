@@ -10,6 +10,7 @@ import ErrorPage from './pages/ErrorPage.jsx'
 import Cart from './pages/Cart.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
+import SingleProduct from './pages/SingleProduct.jsx'
 
 
 function App() {
@@ -46,7 +47,11 @@ function App() {
       {
         path: '/profile',
         element: <Profile />
-      }
+      },
+      {
+        path: '/product/:id',
+        element: <SingleProduct />
+      },
     ]
   }])
 
