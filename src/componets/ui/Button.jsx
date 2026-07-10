@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom'
-
 // DEFINED THE STYLE FOR EACH VARIENT
 
 const varients = {
@@ -12,14 +10,15 @@ const Button = ({
   children,
   varient = 'btnBlackBg',
   className = '',
-  to = ''
+  onClick,
+  type = "button"
 }) => {
 
-  const baseStyle = "rounded font-semibold flex items-center gap-3 shadow-lg hover:shadow-xl transition duration-300";
+  const baseStyle = "cursor-pointer rounded font-semibold flex items-center gap-3 shadow-lg hover:shadow-xl transition duration-300";
 
 
   return (
-    <Link to={to} className={`${baseStyle} ${varients[varient]} ${className}`}> {children} </Link>
+    <button onClick={onClick} className={`${baseStyle} ${varients[varient]} ${className}`} type={type}> {children} </button>
   )
 }
 

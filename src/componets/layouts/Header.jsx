@@ -7,7 +7,7 @@ import LoginUser from '../ui/LoginUser';
 import { mainLinks } from '../../constants/navigationData';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSearch } from '../../store/reducers/productSlice';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 
 
@@ -16,6 +16,7 @@ import useDebounce from '../../hooks/useDebounce';
 const Header = () => {
 
   const search = useSelector(state => state.products.search);
+  const cartItems = useSelector(state => state.cart.cartItems);
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,9 @@ const Header = () => {
     dispatch(setSearch(debouncedSearch));
   }, [debouncedSearch]);
 
+  const cartItemsTotalQty = useMemo(() => {
+    return cartItems?.reduce((total, item) => total + item.quantity, 0)
+  }, [cartItems]);
 
 
   return (
@@ -39,7 +43,7 @@ const Header = () => {
 
           <Search onChange={setLocal} value={local} />
           <div className="flex items-center gap-x-5">
-            <Cart />
+            <Cart cartItemsTotalQty={cartItemsTotalQty} />
             <LoginUser />
           </div>
         </div>

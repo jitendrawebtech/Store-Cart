@@ -1,9 +1,22 @@
 import { FaRegStar, FaStar } from "react-icons/fa";
-import Button from "./Button";
 import { Link } from "react-router-dom";
+import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/reducers/cartSlice";
 
 const Card = ({ product, textToCart, textToBuy }) => {
   const { image, price, title, rating, id } = product;
+
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    if (product) {
+      const productWithQty = { ...product, quantity: 1 };
+      dispatch(addToCart(productWithQty));
+      alert(`Added ${productWithQty.quantity} item(s) to cart`);
+    }
+  }
+
   return (
     <div className="rounded-sm shadow-gray-300 hover:shadow-2xl shadow-xl overflow-hidden">
       <Link to={`/product/${id}`} className="bg-gray-200 py-4 px-2 h-60 block">
@@ -33,7 +46,7 @@ const Card = ({ product, textToCart, textToBuy }) => {
         </div>
 
         <div className="flex flex-col gap-y-2 text-center">
-          <Button className="flex justify-center" varient="btnBlackBg" >
+          <Button className="flex justify-center" varient="btnBlackBg" onClick={handleAddToCart}>
             {textToCart}
           </Button>
           <Button className="flex justify-center" varient="btnWhiteBg">

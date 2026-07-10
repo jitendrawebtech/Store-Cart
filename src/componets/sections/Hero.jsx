@@ -1,6 +1,6 @@
 import { FaArrowRight, FaStar } from "react-icons/fa"
 import Badge from "../ui/Badge"
-import Button from "../ui/Button"
+import AnchorButton from "../ui/AnchorButton"
 
 const Hero = () => {
   return (
@@ -15,8 +15,8 @@ const Hero = () => {
               Discover Modern <span className="text-green-600 mx-2">Fashion</span> & Lifestyle Products
             </h1>
             <div className="inline-flex gap-x-4 mt-8">
-              <Button to="/products">Shop Now <FaArrowRight /></Button>
-              <Button to="/categories" varient="btnWhiteBg">Explore More</Button>
+              <AnchorButton to="/products">Shop Now <FaArrowRight /></AnchorButton>
+              <AnchorButton to="/categories" varient="btnWhiteBg">Explore More</AnchorButton>
             </div>
           </div>
 
