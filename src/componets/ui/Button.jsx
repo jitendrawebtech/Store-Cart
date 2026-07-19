@@ -2,7 +2,8 @@
 
 const varients = {
   btnBlackBg: "bg-black hover:bg-gray-700 text-white px-5 py-2",
-  btnWhiteBg: "bg-white hover:bg-black-700 text-back px-5 py-2 border-gray-200 border"
+  btnWhiteBg: "bg-white hover:bg-black-700 text-back px-5 py-2 border-gray-200 border",
+  btnBlackBordered: "border border-black text-black px-5 py-2 hover:text-white hover:bg-black"
 }
 
 

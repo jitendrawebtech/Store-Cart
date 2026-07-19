@@ -31,12 +31,11 @@ const Header = () => {
     return cartItems?.reduce((total, item) => total + item.quantity, 0)
   }, [cartItems]);
 
-
   return (
     <header className="bg-white shadow-md py-3 sticky top-0 z-50">
       <div className="container">
         <div className="flex items-center justify-between">
-          <Link className="logo">
+          <Link to="/" className="logo">
             <img src={logo} alt="Logo" />
           </Link>
           <Nav links={mainLinks} ulClass="hidden lg:flex gap-x-5" linkClass="text-gray-600 hover:text-cyan-600" />

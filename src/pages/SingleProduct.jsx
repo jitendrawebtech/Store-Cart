@@ -6,7 +6,7 @@ import { fetchProductsData, fetchSingleProduct } from '../store/reducers/product
 import { FaRegStar, FaShieldAlt, FaShoppingCart, FaStar, FaUndo } from 'react-icons/fa';
 import Button from '../componets/ui/Button';
 import Card from '../componets/ui/Card';
-// import { addToCart } from '../store/reducers/cartSlice';
+import { addToCart } from '../store/reducers/cartSlice';
 
 const SingleProduct = () => {
 	const { id } = useParams();
@@ -20,15 +20,15 @@ const SingleProduct = () => {
 	}, [dispatch]);
 
 
-	/* 	const handleAddToCart = () => {
-			if (singleProduct) {
-				const singleProductWithQty = { ...singleProduct, quantity: 1 };
-				dispatch(addToCart(singleProductWithQty));
-				alert(`Added ${singleProductWithQty.quantity} item(s) to cart.`)
-			}
+	const handleAddToCart = () => {
+		if (singleProduct) {
+			const singleProductWithQty = { ...singleProduct, quantity: quantity };
+			dispatch(addToCart(singleProductWithQty));
+			alert(`Added ${singleProductWithQty.quantity} item(s) to cart.`);
 		}
-		const cartItems = useSelector(state => state.cart.cartItems);
-		console.log(cartItems); */
+	}
+	/* const cartItems = useSelector(state => state.cart.cartItems);
+	console.log(cartItems); */
 
 
 	return (
@@ -94,7 +94,7 @@ const SingleProduct = () => {
 									</div>
 
 									<div className="flex flex-col gap-y-2 text-center mt-4">
-										<Button className="flex justify-center" varient="btnBlackBg" >
+										<Button onClick={handleAddToCart} className="flex justify-center" varient="btnBlackBg" >
 											{<><FaShoppingCart className="inline-block" /> Add to Cart </>}
 										</Button>
 										<Button className="flex justify-center" varient="btnWhiteBg">
