@@ -1,7 +1,7 @@
 import logo from '../../assets/images/logo.png';
 import Nav from '../ui/Nav';
 import Search from '../ui/Search';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Cart from '../ui/Cart';
 import LoginUser from '../ui/LoginUser';
 import { mainLinks } from '../../constants/navigationData';
@@ -11,9 +11,12 @@ import { useEffect, useMemo, useState } from 'react';
 import useDebounce from '../../hooks/useDebounce';
 
 
-
-
 const Header = () => {
+  const location = useLocation();
+  const [user, setUser] = useState(() => {
+    const storedUser = sessionStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   const search = useSelector(state => state.products.search);
   const cartItems = useSelector(state => state.cart.cartItems);
@@ -25,7 +28,12 @@ const Header = () => {
 
   useEffect(() => {
     dispatch(setSearch(debouncedSearch));
-  }, [debouncedSearch]);
+  }, [debouncedSearch, dispatch]);
+
+  useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    setUser(storedUser ? JSON.parse(storedUser) : null);
+  }, [location.pathname]);
 
   const cartItemsTotalQty = useMemo(() => {
     return cartItems?.reduce((total, item) => total + item.quantity, 0)
@@ -43,7 +51,7 @@ const Header = () => {
           <Search onChange={setLocal} value={local} />
           <div className="flex items-center gap-x-5">
             <Cart cartItemsTotalQty={cartItemsTotalQty} />
-            <LoginUser />
+            <LoginUser user={user} />
           </div>
         </div>
       </div>

@@ -11,6 +11,8 @@ import Cart from './pages/Cart.jsx'
 import Login from './pages/Login.jsx'
 import Profile from './pages/Profile.jsx'
 import SingleProduct from './pages/SingleProduct.jsx'
+import Register from './pages/Register.jsx'
+import ProtectedRoute from './componets/ui/ProtectedRoute.jsx'
 
 
 function App() {
@@ -46,7 +48,15 @@ function App() {
       },
       {
         path: '/profile',
-        element: <Profile />
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        )
+      },
+      {
+        path: '/register',
+        element: <Register />
       },
       {
         path: '/product/:id',

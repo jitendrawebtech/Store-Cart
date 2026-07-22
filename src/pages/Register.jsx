@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import icon from '../assets/images/icon.png';
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import logo from '../assets/images/logofull.png';
+import icon from '../assets/images/icon.png'
 import { CiWarning } from 'react-icons/ci';
-import { FaEnvelope, FaGoogle, FaLock } from 'react-icons/fa6';
+import { FaEnvelope, FaGoogle, FaLock, FaUser } from 'react-icons/fa6';
 import Button from '../componets/ui/Button';
 
 const defaultObject = {
+  name: "",
   email: "",
   password: "",
-  remember: false
+  confirmassword: ""
 }
 
-const Login = () => {
+const Register = () => {
 
   const navigate = useNavigate();
+
   const storedUser = sessionStorage.getItem("user");
   const user = storedUser ? JSON.parse(storedUser) : null;
 
@@ -27,20 +30,21 @@ const Login = () => {
 
   const handleChange = (e) => {
     if (error) setError("");
-    const { name, type, value, checked } = e.target;
-    setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   }
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.email || !formData.password) {
+    if (!formData.name || !formData.email || !formData.password) {
       setError("Please fill all fileds");
       return;
     }
     sessionStorage.setItem("user", JSON.stringify(formData));
     setError("");
-    alert("Login Successfully");
-    navigate("/");
+    alert("Register Successfully");
+    navigate("/")
   }
 
   return (
@@ -53,9 +57,9 @@ const Login = () => {
           <div className="absolute w-72 h-72 bg-white/10 rounded-full -bottom-24 -right-24"></div>
 
           <div className="relative z-10">
-            <h1 className="text-3xl font-extrabold leading-tight">Welcome Back</h1>
-            <p>Login to access your account, manage your orders, wishlist, and enjoy seamless shopping experience.</p>
-            <img className="w-72 my-10 drop-shadow-2xl" src="https://cdn-icons-png.flaticon.com/512/891/891462.png" alt="Shopping" />
+            <h1 className="text-5xl font-extrabold leading-tight">Join Us</h1>
+            <p className="mt-6 text-lg text-indigo-100 leading-8">Create your account and start exploring premium products, exclusive offers, and fast shopping experience.</p>
+            <img className="w-72 my-10 drop-shadow-2xl rounded-2xl border-8 border-white" src={logo} alt="Shopping" />
           </div>
         </div>
 
@@ -65,7 +69,7 @@ const Login = () => {
             <Link to="/">
               <img className="w-12 drop-shadow-2xl rounded-full" src={icon} alt="Login" />
             </Link>
-            <h2 className="text-4xl font-extrabold text-gray-800">Login</h2>
+            <h2 className="text-4xl font-extrabold text-gray-800">Create Account</h2>
             <p className="text-gray-500 my-3">Welcome back! Please login to your account.</p>
           </div>
 
@@ -85,6 +89,15 @@ const Login = () => {
 
           <form onSubmit={handleSubmit} className="mt-6 space-y-6">
             <div>
+              <label className="text-sm font-semibold text-gray-700">Full Name</label>
+              <div className="flex items-center border border-gray-300 rounded-2xl mt-2 px-3 py-4 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-200 transition">
+
+                <FaUser className="text-gray-400 text-sm" />
+                <input onChange={handleChange} className="w-full outline-none px-3 text-sm" type="name" name="name" placeholder="Enter your name" value={formData.name} />
+
+              </div>
+            </div>
+            <div>
               <label className="text-sm font-semibold text-gray-700">Email Address</label>
               <div className="flex items-center border border-gray-300 rounded-2xl mt-2 px-3 py-4 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-200 transition">
 
@@ -103,21 +116,14 @@ const Login = () => {
 
               </div>
             </div>
+            <div>
+              <label className="text-sm font-semibold text-gray-700">Confirm Password</label>
+              <div className="flex items-center border border-gray-300 rounded-2xl mt-2 px-3 py-4 focus-within:border-blue-600 focus-within:ring-2 focus-within:ring-blue-200 transition">
 
-            <div className="flex items-center justify-between text-sm">
+                <FaLock className="text-gray-400 text-sm" />
+                <input onChange={handleChange} className="w-full outline-none px-3 text-sm" type="password" name="confirmassword" placeholder="Enter your confirm password" value={formData.confirmassword} />
 
-              <label className="flex items-center gap-2 text-gray-600">
-                <input className="outline-none px-3 text-sm"
-                  type="checkbox"
-                  name="remember"
-                  placeholder="Enter your Password"
-                  value={formData.remember}
-                  onChange={handleChange}
-                />
-                <span>Remember me</span>
-              </label>
-              <button className="text-blue-600 hover:underline font-medium cursor-pointer" type="button">Forgot Password?</button>
-
+              </div>
             </div>
 
             <Button className="w-full text-center justify-center" type="submit">Login</Button>
@@ -136,10 +142,10 @@ const Login = () => {
 
           </form>
 
-          {/* footer  */}
+          {/* FOOTER  */}
           <p className="text-center text-sm text-gray-500 mt-8">
-            Don't have an account?
-            <Link to="/register" className="text-blue-600 font-semibold ml-1 hover:underline">Register</Link>
+            Already have an account?
+            <Link to="/login" className="text-blue-600 font-semibold ml-1 hover:underline">Login</Link>
           </p>
         </div>
 
@@ -148,4 +154,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

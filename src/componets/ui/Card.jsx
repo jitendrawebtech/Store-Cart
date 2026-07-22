@@ -49,9 +49,6 @@ const Card = ({ product, textToCart, textToBuy }) => {
           <Button className="flex justify-center" varient="btnBlackBg" onClick={handleAddToCart}>
             {textToCart}
           </Button>
-          <Button className="flex justify-center" varient="btnWhiteBg">
-            {textToBuy}
-          </Button>
         </div>
       </div>
     </div>
